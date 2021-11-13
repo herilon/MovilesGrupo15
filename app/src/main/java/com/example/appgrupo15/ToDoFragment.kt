@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.Navigation
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +36,7 @@ class ToDoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var fragmento: View = inflater.inflate(R.layout.fragment_to_do, container, false)
+        /*
         val detail1 : Button = fragmento.findViewById(R.id.btn_detail_1)
         detail1.setOnClickListener { it ->
             val datos = Bundle()
@@ -71,9 +73,20 @@ class ToDoFragment : Fragment() {
                 ?.commit()
         }
 
-
-
+         */
         return fragmento
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val detail1 : Button = view.findViewById(R.id.btn_detail_1)
+        detail1.setOnClickListener {
+            val datos = Bundle()
+            datos.putString("tarea", "Ir al supermercado")
+            datos.putString("hora", "10:00")
+            datos.putString("lugar", "Exito")
+            Navigation.findNavController(it).navigate(R.id.nav_detail, datos)
+        }
     }
 
     companion object {
